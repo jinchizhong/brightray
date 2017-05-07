@@ -25,7 +25,7 @@ enum {
   DIR_USER_DATA = PATH_START,  // Directory where user data can be written.
   DIR_USER_CACHE,  // Directory where user cache can be written.
 
-#if defined(OS_LINUX)
+#if defined(OS_LINUX) || defined(OS_FREEBSD)
   DIR_APP_DATA,  // Application Data directory under the user profile.
 #else
   DIR_APP_DATA = base::DIR_APP_DATA,

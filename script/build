@@ -29,6 +29,13 @@ def build():
         return subprocess.call(['xcodebuild'])
     if sys.platform == 'linux2':
         return subprocess.call(['make'])
+    if 'bsd' in sys.platform:
+        inc_dir = '/usr/local/include:/usr/local/include/glib-2.0:' + \
+                  '/usr/local/lib/glib-2.0/include:/usr/local/include/gdk-pixbuf-2.0'
+        return subprocess.call(['gmake',
+		'CPPFLAGS="-std=c++11"',
+		'C_INCLUDE_PATH=' + inc_dir,
+		'CPLUS_INCLUDE_PATH=' + inc_dir])
 
     assert sys.platform == 'win32', sys.platform
     program_files = os.environ.get('PROGRAMFILES(X86)', os.environ['PROGRAMFILES'])
